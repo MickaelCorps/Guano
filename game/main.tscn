@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://bird.tscn" type="PackedScene" id=1]
+[ext_resource path="res://cat.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -29,13 +30,13 @@ transform/pos = Vector2( 224.938, 119.844 )
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, -0, 0, 1, 630.072, 745.443 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 630.072, 745.443 )
 shapes/0/trigger = false
 shapes/1/shape = SubResource( 2 )
-shapes/1/transform = Matrix32( 5.07566, -0, 0, 37.2172, 1291.1, 367.723 )
+shapes/1/transform = Matrix32( 5.07566, 0, 0, 37.2172, 1291.1, 367.723 )
 shapes/1/trigger = false
 shapes/2/shape = SubResource( 3 )
-shapes/2/transform = Matrix32( 1, -0, 0, 1, 630.084, -8.14507 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 630.084, -8.14507 )
 shapes/2/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -65,3 +66,10 @@ transform/pos = Vector2( 630.084, -8.14507 )
 shape = SubResource( 3 )
 trigger = false
 _update_shape_index = 2
+
+[node name="cat" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 665.928, 685.873 )
+mass = 1.02041
+
+
