@@ -4,6 +4,7 @@ extends RigidBody2D
 # Lift-to-drag ratio frictions
 const LTD = 300
 const SHIT_COOLDOWN = 0.5
+const STUN_COOLDOWN = 2
 const START_SPEED = Vector2(100, 0)
 const MAX_SPEED = 500
 const STALLING_SPEED = 15
@@ -14,10 +15,12 @@ var siding_left = false
 var guano = preload("res://guano.scn")
 onready var cloaca = self.get_node("cloaca")
 var cur_shit_cooldown = 0
+var cur_stun_cooldown = 0
 
 var airspeed = 100
 var horizon = Vector2(0, 1)
 var stalling = false
+var scale = Vector2(1,1)
 
 
 func _ready():
@@ -39,7 +42,12 @@ func _integrate_forces(s):
 		cur_shit_cooldown = SHIT_COOLDOWN
 		var gi = guano.instance()
 		cloaca.get_pos()
-		var pos = self.get_pos() + self.get_node("cloaca").get_pos()
+		var ss
+		if siding_left:
+			ss = -1.0
+		else:
+			ss = 1.0
+		var pos = self.get_pos() + cloaca.get_pos() * Vector2(ss,1.0)
 		gi.set_pos(pos)
 		# Rotate the guano according to bird's speed vector
 		gi.set_rot(atan2(s.get_total_gravity().y, lv.x))
@@ -63,18 +71,18 @@ func _integrate_forces(s):
 			print("RECOVEEEEEER")
 			# Recovering the stall
 			stalling = false
-			self.get_node(".").set_mode(2)  # switch back to Character mode
+			self.set_mode(MODE_CHARACTER)  # switch back to Character mode
 		else:
 			# Freely apply gravity
 			lv += s.get_total_gravity() * step
 	elif airspeed < STALLING_SPEED:
 		# Start stalling
 		stalling = true
-		self.get_node(".").set_mode(0)  # switch to rigid mode
+		self.set_mode(MODE_RIGID)  # switch to rigid mode
 	else:
 		# Compute vertical and horizontal speed by projection
 		var vy = -sin(horizon_angl) * (airspeed + s.get_total_gravity().y * step) + LTD * step
-		print(vy, "  ", self.get_pos().y, "  ", s.get_total_gravity().y)
+#		print(vy, "  ", self.get_pos().y, "  ", s.get_total_gravity().y)
 		lv = Vector2(cos(horizon_angl) * airspeed, vy)
 
 	# Compute new airspeed for next step
@@ -88,12 +96,12 @@ func _integrate_forces(s):
 	var new_siding_left = horizon_angl > PI/2 or horizon_angl < -PI/2
 	if new_siding_left != siding_left:
 		if new_siding_left:
-			get_node("Sprite").set_scale(Vector2(1,-1))
+			self.get_node("Sprite").set_scale(Vector2(1,-1))
 		else:
-			get_node("Sprite").set_scale(Vector2(1,1))
-
+			self.get_node("Sprite").set_scale(Vector2(1,1))
 		siding_left=new_siding_left  # Update siding
-
+#
+	self.set_scale(scale)
 	s.set_linear_velocity(lv)
 
 
