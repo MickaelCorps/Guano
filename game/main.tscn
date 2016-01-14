@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://bird.tscn" type="PackedScene" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 659.366, 24.6976 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 2.14575, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 672.891, 10 )
+
+[node name="Node" type="Node"]
+
+__meta__ = { "__editor_plugin_screen__":"2D" }
+
+[node name="bird" parent="." instance=ExtResource( 1 )]
+
+transform/pos = Vector2( 224.938, 119.844 )
+
+[node name="ground" type="StaticBody2D" parent="."]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, -0, 0, 1, 630.072, 745.443 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 5.07566, -0, 0, 37.2172, 1291.1, 367.723 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 3 )
+shapes/2/transform = Matrix32( 1, -0, 0, 1, 630.084, -8.14507 )
+shapes/2/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground"]
+
+transform/pos = Vector2( 630.072, 745.443 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="ground"]
+
+transform/pos = Vector2( 1291.1, 367.723 )
+transform/scale = Vector2( 5.07566, 37.2172 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 1
+
+[node name="CollisionShape2D 3" type="CollisionShape2D" parent="ground"]
+
+transform/pos = Vector2( 630.084, -8.14507 )
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = 2

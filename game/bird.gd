@@ -12,7 +12,7 @@ const TURNING_SPEED = PI
 const HOPPING_VECT = Vector2(50, 50)
 
 var siding_left = false
-var guano = preload("res://guano.scn")
+var guano = preload("res://guano.tscn")
 onready var cloaca = self.get_node("cloaca")
 var cur_shit_cooldown = 0
 var cur_stun_cooldown = 0
@@ -90,7 +90,7 @@ func _integrate_forces(s):
 	if airspeed > MAX_SPEED:
 		airspeed = MAX_SPEED
 
-	# Bird's rigid body is in character mode, then rotation is reseted each step 
+	# Bird's rigid body is in character mode, then rotation is reseted each step
 	self.set_rot(horizon_angl)
 
 	var new_siding_left = horizon_angl > PI/2 or horizon_angl < -PI/2
