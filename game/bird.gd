@@ -127,3 +127,4 @@ func _on_body_enter(body):
 	# Bird get stunned by the hit
 	cur_stun_cooldown = STUN_COOLDOWN
 	self.set_mode(MODE_RIGID)
+	airspeed = 0
