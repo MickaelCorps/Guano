@@ -11,7 +11,12 @@ func _ready():
 	
 	foot = get_node("Foot")
 	foot.add_exception(self)
-	
+
+
+func move(axis_velocity, direction):
+	self.get_node("Sprite").set_scale(Vector2(direction, 1))
+	self.set_axis_velocity(Vector2(axis_velocity, 0))
+
 
 func _process(delta):
 	
@@ -24,21 +29,13 @@ func _process(delta):
 	if foot.is_colliding():
 		if jump:		
 			set_axis_velocity(Vector2(0, JUMP_LENGTH))
-				
 		if move_left:
-			self.get_node("Sprite").set_scale(Vector2(1, 1))
-			set_axis_velocity(Vector2(-HORIZONTAL_LENGTH, 0))
-		
+			self.move(-HORIZONTAL_LENGTH, 1)
 		if move_right:
-			self.get_node("Sprite").set_scale(Vector2(-1, 1))
-			set_axis_velocity(Vector2(HORIZONTAL_LENGTH, 0))
-	else:
-				
+			self.move(HORIZONTAL_LENGTH, -1)
+	else:			
 		if move_left:
-			self.get_node("Sprite").set_scale(Vector2(1, 1))
-			set_axis_velocity(Vector2(-HORIZONTAL_LENGTH/2, 0))
-		
+			self.move(-HORIZONTAL_LENGTH/2, 1)
 		if move_right:
-			self.get_node("Sprite").set_scale(Vector2(-1, 1))
-			set_axis_velocity(Vector2(HORIZONTAL_LENGTH/2, 0))
+			self.move(HORIZONTAL_LENGTH/2, -1)
 
