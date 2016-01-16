@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://guano.png" type="Texture" id=1]
+[ext_resource path="res://guano.gd" type="Script" id=1]
+[ext_resource path="res://guano.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -11,7 +12,7 @@ extents = Vector2( 2.1473, 4.97926 )
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, -0, 0, 1, 0, -0.313361 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -0.313361 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -22,15 +23,16 @@ bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
+contacts_reported = 1
+contact_monitor = true
 sleeping = false
 can_sleep = true
 velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
-__meta__ = { "__editor_plugin_screen__":"2D" }
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"Script" }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -42,7 +44,44 @@ _update_shape_index = 0
 [node name="Sprite" type="Sprite" parent="."]
 
 transform/pos = Vector2( 0.016449, 0.0345192 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 offset = Vector2( 1.48768, -0.535896 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+config/amount = 64
+config/lifetime = 0.3
+config/preprocess = 0.5
+config/emit_timeout = 0.3
+config/emitting = false
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = 30.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/initial_size = 0.2
+randomness/final_size = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="body_enter" from="." to="." method="_on_body_enter"]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 
