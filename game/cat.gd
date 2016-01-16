@@ -29,4 +29,12 @@ func _process(delta):
 		
 		if move_right:
 			set_axis_velocity(Vector2(HORIZONTAL_LENGTH, 0))
+	else:
+				
+		if move_left:
+			set_axis_velocity(Vector2(-HORIZONTAL_LENGTH/2, 0))
+		
+		if move_right:
+			set_axis_velocity(Vector2(HORIZONTAL_LENGTH/2, 0))
+		
 
