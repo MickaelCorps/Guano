@@ -42,7 +42,7 @@ velocity/linear = Vector2( 0, 0 )
 velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
-__meta__ = { "__editor_plugin_screen__":"Script" }
+__meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="Sprite" type="Sprite" parent="."]
 
@@ -59,6 +59,9 @@ _update_shape_index = 0
 __meta__ = { "_edit_lock_":true }
 
 [node name="Position2D" type="Position2D" parent="."]
+
+transform/pos = Vector2( 0.138662, 6.86844 )
+transform/scale = Vector2( 0.992402, 1 )
 
 [node name="Head - CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -78,5 +81,6 @@ enabled = true
 cast_to = Vector2( 0, 50 )
 layer_mask = 1
 type_mask = 15
+__meta__ = { "_edit_lock_":true }
 
 
