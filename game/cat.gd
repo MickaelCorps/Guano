@@ -1,7 +1,8 @@
 
 extends RigidBody2D
 
-var HORIZONTAL_LENGTH = 150
+var HORIZONTAL_LENGTH = 200
+var JUMPING_HORIZONTAL_LENGTH = 100
 var JUMP_LENGTH = -200
 
 var foot
@@ -35,7 +36,7 @@ func _process(delta):
 			self.move(HORIZONTAL_LENGTH, -1)
 	else:			
 		if move_left:
-			self.move(-HORIZONTAL_LENGTH/2, 1)
+			self.move(-JUMPING_HORIZONTAL_LENGTH, 1)
 		if move_right:
-			self.move(HORIZONTAL_LENGTH/2, -1)
+			self.move(JUMPING_HORIZONTAL_LENGTH, -1)
 
